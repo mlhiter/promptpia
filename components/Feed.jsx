@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import PromptCard from './PromptCard'
+import { useRouter } from 'next/navigation'
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -19,6 +20,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('')
   const [posts, setPosts] = useState([])
+  const router = useRouter()
 
   const handleSearchChange = (e) => {}
 
@@ -26,11 +28,10 @@ const Feed = () => {
     const fetchPosts = async () => {
       const response = await fetch('/api/prompt')
       const data = await response.json()
-      console.log(data)
       setPosts(data)
     }
     fetchPosts()
-  }, [])
+  }, [router])
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
