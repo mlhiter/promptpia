@@ -8,6 +8,9 @@ const handler = NextAuth({
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+      httpOptions: {
+        timeout: 50000,
+      },
     }),
   ],
   callbacks: {
@@ -30,8 +33,8 @@ const handler = NextAuth({
         if (!userExits) {
           await User.create({
             email: profile.email,
-            username: profile.name.replace(' ', '').toLowerCase(),
-            image: profile.picture,
+            username: profile.name,
+            image: profile.avatar_url,
           })
         }
         return true
