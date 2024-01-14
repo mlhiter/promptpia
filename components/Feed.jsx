@@ -32,7 +32,7 @@ const Feed = () => {
     fetchPosts()
   }, [])
   return (
-    <section>
+    <section className="feed">
       <form className="relative w-full flex-center">
         <input
           type="text"
